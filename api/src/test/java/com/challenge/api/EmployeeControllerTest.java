@@ -1,4 +1,4 @@
-package com.challenge.api.controller;
+package com.challenge.api;
 
 import com.challenge.api.model.Employee;
 import com.challenge.api.model.MockEmployee;
