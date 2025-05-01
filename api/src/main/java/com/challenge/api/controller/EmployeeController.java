@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
- * Fill in the missing aspects of this Spring Web REST Controller. Don't forget to add a Service layer.
+ * Fill in the missing aspects of this Spring Web REST Controller. Don't forget to add a Service layer [DONE].
  */
 @RestController
 @RequestMapping("/api/v1/employee")
@@ -19,8 +19,12 @@ public class EmployeeController {
      * @implNote Need not be concerned with an actual persistence layer. Generate mock Employee models as necessary.
      * @return One or more Employees.
      */
+    private EmployeeService employeeService;
+
+    @GetMapping
     public List<Employee> getAllEmployees() {
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        // throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        return employeeService.getEmployees();
     }
 
     /**
@@ -28,8 +32,11 @@ public class EmployeeController {
      * @param uuid Employee UUID
      * @return Requested Employee if exists
      */
-    public Employee getEmployeeByUuid(UUID uuid) {
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+    @GetMapping("/{uuid}")
+    public Employee getEmployeeByUuid(@PathVariable UUID uuid) {
+        // throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        return employeeService.getEmployeeByUuid(uuid)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     /**
@@ -37,7 +44,9 @@ public class EmployeeController {
      * @param requestBody hint!
      * @return Newly created Employee
      */
-    public Employee createEmployee(Object requestBody) {
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+    @PostMapping
+    public Employee createEmployee(@RequestBody Employee requestBody) {
+        // throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        return employeeService.createEmployee(requestBody);
     }
 }
